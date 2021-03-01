@@ -1,0 +1,85 @@
+-- MySQL dump 10.13  Distrib 5.7.33, for Linux (x86_64)
+--
+-- Host: localhost    Database: appconsid
+-- ------------------------------------------------------
+-- Server version	5.7.33-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `CATEGORY`
+--
+
+DROP TABLE IF EXISTS `CATEGORY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CATEGORY` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CATEGORYNAME` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CATEGORY`
+--
+
+LOCK TABLES `CATEGORY` WRITE;
+/*!40000 ALTER TABLE `CATEGORY` DISABLE KEYS */;
+INSERT INTO `CATEGORY` VALUES (67,'Fantasy'),(68,'Horror'),(69,'Thriller'),(70,'Comedy');
+/*!40000 ALTER TABLE `CATEGORY` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `LIBRARYITEM`
+--
+
+DROP TABLE IF EXISTS `LIBRARYITEM`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `LIBRARYITEM` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CATEGORYID` int(11) NOT NULL,
+  `TITLE` varchar(50) NOT NULL,
+  `AUTHOR` varchar(50) NOT NULL,
+  `PAGES` int(11) DEFAULT NULL,
+  `RUNTIMEMINUTES` int(11) DEFAULT NULL,
+  `ISBORROWABLE` tinyint(1) NOT NULL,
+  `BORROWER` varchar(100) DEFAULT NULL,
+  `TYPE` varchar(100) NOT NULL,
+  `BORROWDATE` date DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `fk_category_id` (`CATEGORYID`),
+  CONSTRAINT `fk_category_id` FOREIGN KEY (`CATEGORYID`) REFERENCES `CATEGORY` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `LIBRARYITEM`
+--
+
+LOCK TABLES `LIBRARYITEM` WRITE;
+/*!40000 ALTER TABLE `LIBRARYITEM` DISABLE KEYS */;
+INSERT INTO `LIBRARYITEM` VALUES (152,67,'A Game Of Thrones (AGOT)','George R.R Martin',564,0,1,NULL,'book',NULL),(153,67,' The Name Of The Wind (TNOTW)','Patrick Rothfuss',0,89,0,'Malik Musovic','dvd','2021-02-25'),(154,67,'The Blade Itself (TBI)','John Lennon',0,97,1,NULL,'audio book',NULL),(155,67,'Lord Of The Rings (LOTR)','J.R Tolkien',535,0,1,NULL,'reference book',NULL);
+/*!40000 ALTER TABLE `LIBRARYITEM` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-02-26  0:05:39
